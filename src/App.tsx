@@ -8,6 +8,7 @@ function App() {
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState('');
   const sick = useFetchSick(keyword);
+  console.log(sick);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

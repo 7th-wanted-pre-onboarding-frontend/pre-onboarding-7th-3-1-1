@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SickService from '../services/sick.service';
 import { AppDispatch, RootState } from '../store';
 import { getSickList } from '../store/sick';

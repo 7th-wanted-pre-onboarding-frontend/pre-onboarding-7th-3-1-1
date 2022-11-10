@@ -49,6 +49,7 @@
     "no-case-declarations": "off",
     "lines-between-class-members": "off",
     "default-param-last": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-console": "off"
   }
 }
