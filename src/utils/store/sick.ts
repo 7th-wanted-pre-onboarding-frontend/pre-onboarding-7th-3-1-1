@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import localStorageService from '../services/localStorage.service';
 import sickService from '../services/sick.service';
-import { Sicks } from '../types/Sick';
+import { Cache } from '../types/Cache';
 
 export const getSickList = createAsyncThunk(
   'GET_SICKLIST',
@@ -17,26 +17,18 @@ export const getSickList = createAsyncThunk(
   }
 );
 
-type InitialState = {
-  [key: string]: {
-    value: Sicks;
-    date: number;
-  };
-};
+const initialState: Cache = {};
 
-const initialState: InitialState = {};
-
-const sickSlice = createSlice<InitialState, SliceCaseReducers<InitialState>>({
+const sickSlice = createSlice<Cache, SliceCaseReducers<Cache>>({
   name: 'sick',
   initialState,
   reducers: {
     setSickList: {
       reducer: (state, action) => {
         state = action.payload;
-        console.log('state:', state);
         return state;
       },
-      prepare: (payload: PayloadAction<InitialState>) => {
+      prepare: (payload: PayloadAction<Cache>) => {
         return { payload };
       }
     }

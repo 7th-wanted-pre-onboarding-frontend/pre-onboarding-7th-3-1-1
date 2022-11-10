@@ -3,13 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import SickService from '../services/sick.service';
 import { AppDispatch, RootState } from '../store';
 import { getSickList } from '../store/sick';
-import { Sicks } from '../types/Sick';
+import { CacheItem } from '../types/Cache';
 
 let timer: NodeJS.Timeout | null = null;
-export default function useFetchSick(keyword: string): {
-  value: Sicks;
-  date: number;
-} | null {
+export default function useFetchSick(keyword: string): CacheItem | null {
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => {
     return state.sick;
