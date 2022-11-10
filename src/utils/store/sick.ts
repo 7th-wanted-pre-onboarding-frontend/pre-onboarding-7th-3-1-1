@@ -33,6 +33,7 @@ const sickSlice = createSlice<InitialState, SliceCaseReducers<InitialState>>({
     setSickList: {
       reducer: (state, action) => {
         state = action.payload;
+        console.log('state:', state);
         return state;
       },
       prepare: (payload: PayloadAction<InitialState>) => {

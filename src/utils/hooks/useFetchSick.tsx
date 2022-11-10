@@ -14,6 +14,7 @@ export default function useFetchSick(keyword: string): {
   const data = useSelector((state: RootState) => {
     return state.sick;
   });
+
   const sick = useMemo(() => {
     if (keyword === '' || !data[keyword]) {
       return null;
@@ -33,6 +34,7 @@ export default function useFetchSick(keyword: string): {
         dispatch(getSickList(keyword));
       }
     };
+
     const debouce = (callback: () => void) => {
       if (timer) {
         clearTimeout(timer);
