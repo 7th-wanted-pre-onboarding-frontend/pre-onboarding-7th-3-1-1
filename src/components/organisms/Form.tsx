@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import useFetchSick from '../../utils/hooks/useFetchSick';
 import Atoms from '../atoms';
 import Icons from '../icons';
+import Molecules from '../molecules';
 
 export default function Form() {
   const [keyword, setKeyword] = useState('');
@@ -9,8 +10,7 @@ export default function Form() {
   const sick = useFetchSick(keyword);
   const focusEffect = focus ? '2px solid #007BE9' : '2px solid transparent';
   const ref = useRef<HTMLInputElement | null>(null);
-
-  console.log('sick:', sick);
+  const isToggled = !focus && !keyword;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -24,6 +24,11 @@ export default function Form() {
   const onClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     const isButton = target.closest('button');
+    const isSearchBox = target.closest('.search-box');
+
+    if (isSearchBox) {
+      return;
+    }
 
     if (!isButton && ref.current) {
       ref.current.focus();
@@ -45,7 +50,6 @@ export default function Form() {
           maxWidth: '490px',
           margin: '0 auto',
           borderRadius: '9999px',
-          overflow: 'hidden',
           background: '#fff',
           border: focusEffect
         }}
@@ -59,7 +63,7 @@ export default function Form() {
           value={keyword}
           ref={ref}
         />
-        {!focus && !keyword && (
+        {isToggled && (
           <Atoms.Paragraph
             position='absolute'
             top='50%'
@@ -85,6 +89,7 @@ export default function Form() {
         >
           <Icons.Search />
         </Atoms.CircleButton>
+        {!isToggled && <Molecules.SearchBox keyword={keyword} data={sick} />}
       </div>
     </form>
   );
