@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 3-1 1팀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 팀 소개
 
-## Available Scripts
+| 이름         | github                         |
+| ------------ | ------------------------------ |
+| 박승민(팀장) | https://github.com/pmb087      |
+| 김정현       | https://github.com/task11      |
+| 김준호       | https://github.com/kimjuno97   |
+| 윤태성       | https://github.com/taesung1993 |
+| 임형섭       | https://github.com/4hsnim      |
+| 조서연       | https://github.com/sycho09     |
 
-In the project directory, you can run:
+# 기술 스택
 
-### `npm start`
+<img src="https://img.shields.io/badge/javascript_ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 실행 방법
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. 프로젝트 관련 라이브러리를 설치합니다.
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. 프로젝트를 실행합니다.
 
-### `npm run build`
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 아토믹 디자인 패턴 도입
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src='https://fe-developers.kakaoent.com/static/34afd4d0a47ff85c8f34295c18c2e374/f058b/atomic-design-flow.png' alt='아토믹 디자인' />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 디렉토리 구조
 
-### `npm run eject`
+```
+📦 src
+┣ 📂 component /- 레이아웃에 구성될 컴포넌트
+┃ ┣ 📂 icons
+┃ ┣ 📂 atoms
+┃ ┣ 📂 molecules
+┃ ┣ 📂 organisms
+┃ ┗ 📂 templates
+┃ ┗ 📂 pages
+┃ ┗ 📜 GlobalStyle.ts
+┣ 📂 utils /- 로직 분리
+┃ ┣ 📂 hooks /- 커스텀 훅 관리
+┃ ┣ 📂 server /- axios 커스텀
+┃ ┣ 📂 services /- api 서비스
+┃ ┣ 📂 store /- redux
+┃ ┣ 📂 types /- 공용 타입
+┣ 📜 App.tsx
+┗ 📜 index.tsx
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Commit Convention
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### commitlint
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 사용 이유: 팀의 생산성 향상과 커밋 메세지 히스토리의 관리를 위해 통일성이 필요하다고 판단하였기 때문에 사용하였습니다.
+- [Commitlint 문서](https://commitlint.js.org/#/)를 참고하여 설정하였습니다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  <img width="689" alt="2022-10-28_08 33 50" src="https://user-images.githubusercontent.com/56210700/198418936-4d3fc67a-7bf2-40b5-bf80-421d235c4621.png">
