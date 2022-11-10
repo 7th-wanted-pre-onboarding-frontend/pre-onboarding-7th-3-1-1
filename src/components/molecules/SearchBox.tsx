@@ -7,22 +7,20 @@ type Props = {
   keyword: string;
   data: CacheItem | null;
   keyDownIndex: number;
+  onSetKeyword: (value: string) => void;
 };
 
 export default forwardRef<HTMLUListElement, Props>(function SearchBox(
-  { keyword, data, keyDownIndex },
+  { keyword, data, keyDownIndex, onSetKeyword },
   ref
 ) {
+  const currentSearchValue = keyword || '검색어를 입력해주세요';
   const recommeded = useMemo(() => {
     if (data === null) {
       return [];
     }
     return data.value;
   }, [data]);
-
-  const onClick = () => {
-    console.log('클릭');
-  };
 
   console.log('recommeded:', recommeded);
 
@@ -51,7 +49,10 @@ export default forwardRef<HTMLUListElement, Props>(function SearchBox(
           padding: '24px 0 8px 0'
         }}
       >
-        <Molecules.SickItem title={keyword} onClick={onClick} />
+        <Molecules.SickItem
+          keyword={currentSearchValue}
+          onClick={onSetKeyword}
+        />
 
         <Atoms.Title2 color='#6a737b'>추천 검색어</Atoms.Title2>
       </div>
@@ -66,8 +67,9 @@ export default forwardRef<HTMLUListElement, Props>(function SearchBox(
         {recommeded.map(({ sickCd, sickNm }, idx) => (
           <Molecules.SickItem
             key={sickCd}
-            title={sickNm}
-            onClick={onClick}
+            sickNm={sickNm}
+            keyword={keyword}
+            onClick={onSetKeyword}
             isActivated={keyDownIndex === idx}
           />
         ))}

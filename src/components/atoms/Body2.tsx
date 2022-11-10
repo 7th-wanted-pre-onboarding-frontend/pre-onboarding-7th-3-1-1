@@ -5,7 +5,7 @@ type Props = {
 };
 const Body2 = styled.div<Props>`
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.6;
   letter-spacing: -0.018em;
   color: ${({ color }) => color};

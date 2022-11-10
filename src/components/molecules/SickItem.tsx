@@ -1,18 +1,29 @@
 import React from 'react';
 import Atoms from '../atoms';
 import Icons from '../icons';
+import Molecules from '.';
 
 type Props = {
-  title: string;
+  sickNm?: string;
+  keyword: string;
   isActivated?: boolean;
-  onClick: () => void;
+  onClick: (value: string) => void;
 };
 
-export default function SickItem({ title, isActivated, onClick }: Props) {
+export default function SickItem({
+  sickNm,
+  keyword,
+  isActivated,
+  onClick
+}: Props) {
+  const defaultContent = sickNm || keyword;
   return (
-    <Atoms.SickItemWrapper onClick={onClick} isActivated={!!isActivated}>
+    <Atoms.SickItemWrapper
+      onClick={() => onClick(defaultContent)}
+      isActivated={!!isActivated}
+    >
       <Icons.SmallSearch />
-      <Atoms.Body2 color='#000000'>{title}</Atoms.Body2>
+      <Molecules.SickTitle inputValue={keyword} recommend={sickNm} />
     </Atoms.SickItemWrapper>
   );
 }
