@@ -1,4 +1,10 @@
 import React, { useRef, useState } from 'react';
+import {
+  ArrowDown,
+  ArrowUp,
+  Enter,
+  Escape
+} from '../../utils/constants/common';
 import useFetchSick from '../../utils/hooks/useFetchSick';
 import Atoms from '../atoms';
 import Icons from '../icons';
@@ -11,10 +17,15 @@ export default function Form() {
   const focusEffect = focus ? '2px solid #007BE9' : '2px solid transparent';
   const ref = useRef<HTMLInputElement | null>(null);
   const isToggled = !focus && !keyword;
+  const searchBoxRef = useRef<HTMLUListElement | null>(null);
+  const [keyDownIndex, setKeyDownIndex] = useState<number>(-1);
+  const [, setScrollY] = useState<number>(0);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setKeyword(value);
+    setScrollY(0);
+    setKeyDownIndex(-1);
   };
 
   const onBlur = () => {
@@ -36,11 +47,83 @@ export default function Form() {
     }
   };
 
+  const controlScroll = (
+    element: HTMLUListElement | null,
+    index: number,
+    op: 'plus' | 'minus' | 'reset'
+  ) => {
+    if (!element) return;
+    const { children } = element;
+    if (!children.length) return;
+    const target = children[index];
+    if (!target) return;
+    const height = target.clientHeight;
+
+    if (op === 'reset' || index === children.length - 1) {
+      setScrollY(0);
+    } else {
+      setScrollY((currentState) => {
+        let result =
+          op === 'plus' ? currentState + height : currentState - height;
+
+        if (result <= 0) {
+          result = 0;
+        }
+        element.scrollTo(0, result);
+        return result;
+      });
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const parent = searchBoxRef.current;
+
+    if (keyword.length > 0) {
+      if (event.key === ArrowDown) {
+        setKeyDownIndex(keyDownIndex + 1);
+
+        if (sick?.value.length === keyDownIndex + 1) {
+          setKeyDownIndex(0);
+        }
+        controlScroll(parent, keyDownIndex, 'plus');
+        return;
+      }
+
+      if (event.key === ArrowUp) {
+        setKeyDownIndex(keyDownIndex - 1);
+
+        if (keyDownIndex <= 0) {
+          setKeyDownIndex(0);
+        }
+        controlScroll(parent, keyDownIndex, 'minus');
+        return;
+      }
+
+      if (event.key === Escape) {
+        setKeyDownIndex(keyDownIndex - 1);
+        controlScroll(parent, keyDownIndex, 'reset');
+        return;
+      }
+
+      if (event.key === Enter) {
+        setKeyDownIndex(-1);
+        controlScroll(parent, keyDownIndex, 'reset');
+
+        if (sick) {
+          setKeyword(sick.value[keyDownIndex].sickNm);
+        }
+
+        return;
+      }
+    }
+  };
+
   return (
     <form
       style={{
         marginTop: '40px'
       }}
+      onSubmit={(e) => e.preventDefault()}
     >
       <div
         style={{
@@ -60,6 +143,7 @@ export default function Form() {
           type='text'
           onChange={onChange}
           onBlur={onBlur}
+          onKeyDown={handleKeyDown}
           value={keyword}
           ref={ref}
         />
@@ -89,7 +173,14 @@ export default function Form() {
         >
           <Icons.Search />
         </Atoms.CircleButton>
-        {!isToggled && <Molecules.SearchBox keyword={keyword} data={sick} />}
+        {true && (
+          <Molecules.SearchBox
+            ref={searchBoxRef}
+            keyword={keyword}
+            data={sick}
+            keyDownIndex={keyDownIndex}
+          />
+        )}
       </div>
     </form>
   );

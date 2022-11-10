@@ -14,6 +14,9 @@ type Props = {
   justifyContent?: string;
   padding?: string;
   boxShadow?: string;
+  maxHeight?: string;
+  overflowY?: string;
+  overflow?: string;
 };
 
 const Wrapper = styled.div<Props>`
@@ -29,6 +32,9 @@ const Wrapper = styled.div<Props>`
   position: ${({ position }) => position};
   top: ${({ top }) => top};
   left: ${({ left }) => left};
+  max-height: ${({ maxHeight }) => maxHeight};
+  overflow-y: ${({ overflowY }) => overflowY};
+  overflow: ${({ overflow }) => overflow};
 `;
 
 export default Wrapper;

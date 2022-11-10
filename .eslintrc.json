@@ -50,6 +50,8 @@
     "lines-between-class-members": "off",
     "default-param-last": "off",
     "no-param-reassign": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "react/require-default-props": "off",
+    "no-useless-return": "off"
   }
 }
