@@ -21,6 +21,10 @@ export default function Form() {
   const [keyDownIndex, setKeyDownIndex] = useState<number>(-1);
   const [, setScrollY] = useState<number>(0);
 
+  const onSetKeyword = (value: string) => {
+    setKeyword(value);
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setKeyword(value);
@@ -173,12 +177,13 @@ export default function Form() {
         >
           <Icons.Search />
         </Atoms.CircleButton>
-        {true && (
+        {!isToggled && (
           <Molecules.SearchBox
             ref={searchBoxRef}
             keyword={keyword}
             data={sick}
             keyDownIndex={keyDownIndex}
+            onSetKeyword={onSetKeyword}
           />
         )}
       </div>
