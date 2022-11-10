@@ -1,5 +1,6 @@
 import React from 'react';
 import Atoms from '../atoms';
+import Molecules from '../molecules';
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ type Props = {
 export default function Template({ children }: Props) {
   return (
     <Atoms.Container>
-      <header>헤더</header>
+      <Molecules.Header />
       <main>{children}</main>
     </Atoms.Container>
   );

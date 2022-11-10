@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import useFetchSick from '../../utils/hooks/useFetchSick';
 import localStorageService from '../../utils/services/localStorage.service';
 import { setSickList } from '../../utils/store/sick';
+import Atoms from '../atoms';
+import Organisms from '../organisms';
 import Template from '../templates/Template';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const [keyword, setKeyword] = useState('');
-  const sick = useFetchSick(keyword);
-  console.log(sick);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setKeyword(value);
-  };
 
   useEffect(() => {
     if (localStorageService.has('sicks')) {
@@ -22,12 +15,25 @@ export default function Home() {
       dispatch(setSickList(fetchedSickList));
     }
   }, []);
+
   return (
     <Template>
-      <form>
-        <input type='text' onChange={onChange} />
-        <button type='submit'>검색</button>
-      </form>
+      <section
+        style={{
+          padding: '80px 0 160px',
+          background: '#CAE9FF'
+        }}
+      >
+        <Atoms.Section>
+          <header>
+            <Atoms.Title>
+              국내 모든 임상시험 검색하고
+              <br /> 온라인으로 참여하기
+            </Atoms.Title>
+          </header>
+          <Organisms.Form />
+        </Atoms.Section>
+      </section>
     </Template>
   );
 }
