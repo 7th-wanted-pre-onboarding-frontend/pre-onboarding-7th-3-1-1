@@ -15,6 +15,8 @@ export default function useFetchSick(keyword: string): {
     return state.sick;
   });
 
+  console.log('state:', data);
+
   const sick = useMemo(() => {
     if (keyword === '' || !data[keyword]) {
       return null;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import useFetchSick from '../../utils/hooks/useFetchSick';
 import Atoms from '../atoms';
 import Icons from '../icons';
@@ -8,6 +8,7 @@ export default function Form() {
   const [focus, setFoucs] = useState(false);
   const sick = useFetchSick(keyword);
   const focusEffect = focus ? '2px solid #007BE9' : '2px solid transparent';
+  const ref = useRef<HTMLInputElement | null>(null);
 
   console.log('sick:', sick);
 
@@ -16,12 +17,18 @@ export default function Form() {
     setKeyword(value);
   };
 
-  const onFocus = () => {
-    setFoucs(true);
-  };
-
   const onBlur = () => {
     setFoucs(false);
+  };
+
+  const onClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const isButton = target.closest('button');
+
+    if (!isButton && ref.current) {
+      ref.current.focus();
+      setFoucs(true);
+    }
   };
 
   return (
@@ -42,28 +49,32 @@ export default function Form() {
           background: '#fff',
           border: focusEffect
         }}
+        onClick={onClick}
+        aria-hidden='true'
       >
         <Atoms.Input
           type='text'
           onChange={onChange}
-          onFocus={onFocus}
           onBlur={onBlur}
+          value={keyword}
+          ref={ref}
         />
-        {!focus && (
-          <p
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '24px',
-              transform: 'translateY(-50%)',
-              color: '#AAB2BA'
-            }}
+        {!focus && !keyword && (
+          <Atoms.Paragraph
+            position='absolute'
+            top='50%'
+            left='24px'
+            transform='translateY(-50%)'
+            display='flex'
+            alignItems='center'
+            gap='4px'
           >
-            질환 명을 입력해주세요.
-          </p>
+            <Icons.SmallSearch />
+            <Atoms.Body color='#AAB2BA'>질환 명을 입력해주세요.</Atoms.Body>
+          </Atoms.Paragraph>
         )}
         <Atoms.CircleButton
-          type='submit'
+          type='button'
           size={48}
           backgroundColor='#007BE9'
           position='absolute'
