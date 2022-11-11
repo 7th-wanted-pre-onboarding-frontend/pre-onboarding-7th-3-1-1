@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowUp,
@@ -18,7 +18,7 @@ export default function Form() {
   const ref = useRef<HTMLInputElement | null>(null);
   const isToggled = !focus && !keyword;
   const searchBoxRef = useRef<HTMLUListElement | null>(null);
-  const [keyDownIndex, setKeyDownIndex] = useState<number>(-1);
+  const [keyDownIndex, setKeyDownIndex] = useState<number>(-2);
   const [, setScrollY] = useState<number>(0);
 
   const onSetKeyword = (value: string) => {
@@ -29,7 +29,7 @@ export default function Form() {
     const { value } = e.target;
     setKeyword(value);
     setScrollY(0);
-    setKeyDownIndex(-1);
+    setKeyDownIndex(-2);
   };
 
   const onBlur = () => {
@@ -51,37 +51,7 @@ export default function Form() {
     }
   };
 
-  const controlScroll = (
-    element: HTMLUListElement | null,
-    index: number,
-    op: 'plus' | 'minus' | 'reset'
-  ) => {
-    if (!element) return;
-    const { children } = element;
-    if (!children.length) return;
-    const target = children[index];
-    if (!target) return;
-    const height = target.clientHeight;
-
-    if (op === 'reset' || index === children.length - 1) {
-      setScrollY(0);
-    } else {
-      setScrollY((currentState) => {
-        let result =
-          op === 'plus' ? currentState + height : currentState - height;
-
-        if (result <= 0) {
-          result = 0;
-        }
-        element.scrollTo(0, result);
-        return result;
-      });
-    }
-  };
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const parent = searchBoxRef.current;
-
     if (keyword.length > 0) {
       if (event.key === ArrowDown) {
         setKeyDownIndex(keyDownIndex + 1);
@@ -89,7 +59,6 @@ export default function Form() {
         if (sick?.value.length === keyDownIndex + 1) {
           setKeyDownIndex(0);
         }
-        controlScroll(parent, keyDownIndex, 'plus');
         return;
       }
 
@@ -99,28 +68,35 @@ export default function Form() {
         if (keyDownIndex <= 0) {
           setKeyDownIndex(0);
         }
-        controlScroll(parent, keyDownIndex, 'minus');
         return;
       }
 
       if (event.key === Escape) {
         setKeyDownIndex(keyDownIndex - 1);
-        controlScroll(parent, keyDownIndex, 'reset');
         return;
       }
 
       if (event.key === Enter) {
-        setKeyDownIndex(-1);
-        controlScroll(parent, keyDownIndex, 'reset');
-
+        setKeyDownIndex(-2);
         if (sick) {
           setKeyword(sick.value[keyDownIndex].sickNm);
         }
-
         return;
       }
     }
   };
+
+  useEffect(() => {
+    const parent = searchBoxRef.current;
+    if (!parent) return;
+    const target = parent.children[keyDownIndex + 1];
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  }, [keyDownIndex]);
 
   return (
     <form
