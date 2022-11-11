@@ -115,6 +115,19 @@ https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/b
 ---
 
 - **입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행**
+    - 초기 전략 구상
+        - 디바운싱, 쓰로톨링 기법을 이용한다.
+        
+        ![초기 전략 구상도1](https://user-images.githubusercontent.com/58736618/200614269-0dd912b8-7397-419d-85bf-4ac118491403.png)
+        
+        - abortControll를 이용한다.
+        
+        ![초기 전략 구상도2](https://user-images.githubusercontent.com/58736618/200614820-6b4ef5ea-9ea1-40d2-8e8f-8a76806830b9.png)
+        
+        - 상기 방법을 모두 이용한다.
+    - 이후 전략 수정
+        - 디바운싱의 특성 상 사용자의 입력을 기반으로 요청 자체를 `setTimeout`과 `clearTimeout`으로 관리하기 떄문에 `abortControll` 요청 자체가 사라집니다.
+        - 때문에 디바운싱만 이용하기로 결정했습니다.
     - `Debounce` 는 지연 작업 처리를 효율적으로 구현하는 방법으로 특정 시간 동안 대기하다 마지막에 입력된 내용을 바탕으로 서버 요청을 실행합니다.
         - 입력 값이 변경되면 `Debounce` 함수가 실행됩니다.
         - debounce 함수가 실행되면 `setTimeout()`함수의 실행 대기 함수로 API 호출 함수를 전달합니다.
