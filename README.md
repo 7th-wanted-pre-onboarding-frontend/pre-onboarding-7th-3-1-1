@@ -133,9 +133,9 @@ https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/b
   - **[Discussion](https://github.com/orgs/7th-wanted-pre-onboarding-frontend/discussions/23)**
   - 초기 전략 구상
     - 디바운싱, 쓰로톨링 기법을 이용한다.
-    ![초기 전략 구상도1](https://user-images.githubusercontent.com/58736618/200614269-0dd912b8-7397-419d-85bf-4ac118491403.png)
+      ![초기 전략 구상도1](https://user-images.githubusercontent.com/58736618/200614269-0dd912b8-7397-419d-85bf-4ac118491403.png)
     - abortControll를 이용한다.
-    ![초기 전략 구상도2](https://user-images.githubusercontent.com/58736618/200614820-6b4ef5ea-9ea1-40d2-8e8f-8a76806830b9.png)
+      ![초기 전략 구상도2](https://user-images.githubusercontent.com/58736618/200614820-6b4ef5ea-9ea1-40d2-8e8f-8a76806830b9.png)
     - 상기 방법을 모두 이용한다.
   - 이후 전략 수정
     - 디바운싱의 특성 상 사용자의 입력을 기반으로 요청 자체를 `setTimeout`과 `clearTimeout`으로 관리하기 떄문에 `abortControll` 요청 자체가 사라집니다.
@@ -144,7 +144,7 @@ https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/b
     - 입력 값이 변경되면 `Debounce` 함수가 실행됩니다.
     - debounce 함수가 실행되면 `setTimeout()`함수의 실행 대기 함수로 API 호출 함수를 전달합니다.
     - 지연 대기 시간(500ms) 내에 입력 값 변경이 없으면 API 호출을 실행하고, 변경이 있으면 `clearTimeout` 함수로 실행대기 중인 API 호출 함수의 작업을 취소해 함수의 요청 횟수를 500ms 마다 한 번으로 제한합니다.
-    https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/blob/4d9c2e17ccdcfb572bbeca923f74a46ec8291a88/src/utils/hooks/useFetchSick.tsx#L35-L41
+      https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/blob/4d9c2e17ccdcfb572bbeca923f74a46ec8291a88/src/utils/hooks/useFetchSick.tsx#L35-L41
   - API를 호출할 때 마다 `console.info("calling api")` 출력을 통해 콘솔창에서 API 호출 횟수 확인이 가능하도록 설정
     https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/blob/4d9c2e17ccdcfb572bbeca923f74a46ec8291a88/src/utils/store/sick.ts#L36-L50
 

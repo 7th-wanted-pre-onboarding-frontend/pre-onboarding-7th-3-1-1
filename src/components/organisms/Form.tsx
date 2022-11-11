@@ -87,11 +87,11 @@ export default function Form() {
   useEffect(() => {
     const parent = searchBoxRef.current;
     if (!parent) return;
-    const target = parent.children[keyDownIndex + 1];
+    const target = parent.children[keyDownIndex];
     if (target) {
       target.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'end'
       });
     }
   }, [keyDownIndex]);
