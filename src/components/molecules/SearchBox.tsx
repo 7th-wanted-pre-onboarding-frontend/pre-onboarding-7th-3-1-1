@@ -22,8 +22,6 @@ export default forwardRef<HTMLUListElement, Props>(function SearchBox(
     return data.value;
   }, [data]);
 
-  console.log('recommeded:', recommeded);
-
   return (
     <Atoms.Wrapper
       borderRadius='24px'
