@@ -19,7 +19,6 @@ export default function Form() {
   const isToggled = !focus && !keyword;
   const searchBoxRef = useRef<HTMLUListElement | null>(null);
   const [keyDownIndex, setKeyDownIndex] = useState<number>(-2);
-  const [, setScrollY] = useState<number>(0);
 
   const onSetKeyword = (value: string) => {
     setKeyword(value);
@@ -28,7 +27,6 @@ export default function Form() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setKeyword(value);
-    setScrollY(0);
     setKeyDownIndex(-2);
   };
 
