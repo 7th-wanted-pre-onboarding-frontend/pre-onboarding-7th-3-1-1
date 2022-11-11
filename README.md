@@ -30,7 +30,7 @@ npm install
 
 2. 프로젝트를 실행합니다.
 
-```bash
+```bash 
 npm start
 ```
 
@@ -80,6 +80,21 @@ npm run api   //실행 시 localhost:4000 에 API 서버 실행
 ┗ 📜 index.tsx
 ```
 
+---
+
+# Project
+
+Github Projects와 Issue 기반의 협업 방식을 채택하였습니다.
+
+1. 11월 11일 목요일 14까지 개인 구현 후 `Best Practice`에 가장 적합한 레포지토리를 선택
+2. 선택한 레포지토리를 기반으로 라이브 릴레이 코딩 방식을 통해 작업을 진행.
+3. Github Projects 를 이용하여 task 생성 및 담당자 할당
+4. 해당 task 로 Issue 생성
+5. 해당 Issue로부터 브랜치를 생성하여 작업
+6. PR은 3명 이상으로부터 approved 되어야 merge 가능
+
+---
+
 # Best Practice
 
 ---
@@ -116,6 +131,7 @@ https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-3-1-1/b
 ---
 
 - **입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행**
+    - **[Discussion](https://github.com/orgs/7th-wanted-pre-onboarding-frontend/discussions/23)**
     - 초기 전략 구상
         - 디바운싱, 쓰로톨링 기법을 이용한다.
         
