@@ -89,8 +89,9 @@ npm run api   //실행 시 localhost:4000 에 API 서버 실행
     - **[회의록](https://github.com/orgs/7th-wanted-pre-onboarding-frontend/discussions/20)** 에서 논의한 방법대로 API 호출 후 받은 데이터를 key-value 형태의 변수를 생성해서 localStorage 와 redux 를 사용해 저장하여 로컬 캐싱을 구현합니다.
     
     ![Disscussion1](https://user-images.githubusercontent.com/58736618/200612069-2c771764-1072-45d6-bd5f-aab039ae9b02.png)
+    
+    <img width="860" alt="스크린샷 2022-11-11 09 38 23" src="https://user-images.githubusercontent.com/58736618/201235336-928d7132-7550-4153-8298-a8cea2190bdf.png">
 
-    ![Disscussion2](https://user-images.githubusercontent.com/58736618/200612153-bc715aea-4a04-4071-9423-bc223b70c802.png)
 
     ![Disscussion3](https://user-images.githubusercontent.com/58736618/200612214-45bb179d-376e-40f4-ac26-6ad5c7328c91.png)
     
